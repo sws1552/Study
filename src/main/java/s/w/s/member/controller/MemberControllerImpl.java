@@ -33,7 +33,7 @@ public class MemberControllerImpl   implements MemberController {
 	private MemberService memberService;
 	@Autowired
 	private MemberVO memberVO;
-	//11
+	//111
 	
 	
 	@RequestMapping(value = {"/", "/main.do"}, method = RequestMethod.GET)
