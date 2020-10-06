@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+	 
+	<aop:aspectj-autoproxy />
+	
+	<!-- PropertyPlaceholderConfigurer 클래스를 이용해 
+		데이터베이스 설정 관련 정보를 jdbc.properties 파일에서 읽어 들인다. -->
+	<bean id="propertyPlaceholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>/WEB-INF/config/jdbc/jdbc.properties</value>
+		</property>
+	</bean>
+
+	<!-- 마이바티스에서 제공하는 PooledDataSource 클래스를 이용해서 dataSource 빈을 생성한다. -->
+	<bean id="dataSource"
+		class="org.apache.ibatis.datasource.pooled.PooledDataSource">
+		<property name="driver" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	
+	<!-- sqlSessionFactoryBean 클래스를 이용해 dataSource 속성에 dataSource빈을 설정한다. --> 
+ 	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- ref : id=dataSource를 참조해라 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- configLoacation 속성에 modelConfig.xml를 설정한다. -->
+		<property name="configLocation" value="classpath:mybatis/models/mybatis-config.xml" />
+		<!-- mapperLocations 속성에 mybatis/mappers 패키지의 모든 매퍼 파일들을 읽어 들여와 설정한다. -->
+		<!--  <property name="mapperLocations" value="classpath:mybatis/mappers/*.xml" /> -->
+		<property name="mapperLocations" value="classpath:mybatis/mappers/*.xml" />
+	</bean>
+	
+
+	
+	<!-- DataSourceTransctionManager 클래스를 이용해 dataSource 빈에 트랜잭션을 적용한다. -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+
+	<!-- SqlSessionTemplate 클래스를 이용해 sqlSession 빈을 생성한다. -->
+ 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+</beans>
