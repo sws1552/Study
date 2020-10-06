@@ -33,10 +33,11 @@ public class MemberControllerImpl   implements MemberController {
 	private MemberService memberService;
 	@Autowired
 	private MemberVO memberVO;
-	//111
+	//1111
 	
 	
 	@RequestMapping(value = {"/", "/main.do"}, method = RequestMethod.GET)
+	// 1
 	private ModelAndView main(HttpServletRequest request, HttpServletResponse response)throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
