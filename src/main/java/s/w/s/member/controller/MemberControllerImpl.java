@@ -35,7 +35,7 @@ public class MemberControllerImpl   implements MemberController {
 	private MemberVO memberVO;
 	//1111
 	
-	//1111
+	
 	@RequestMapping(value = {"/", "/main.do"}, method = RequestMethod.GET)
 	// 1
 	private ModelAndView main(HttpServletRequest request, HttpServletResponse response)throws Exception{
