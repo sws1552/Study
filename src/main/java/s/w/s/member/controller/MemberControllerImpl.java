@@ -4,12 +4,13 @@ import java.util.List;
 
 
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import s.w.s.member.service.MemberService;
 import s.w.s.member.vo.MemberVO;
 
@@ -28,7 +30,7 @@ import s.w.s.member.vo.MemberVO;
 @Controller("memberController")
 //@EnableAspectJAutoProxy
 public class MemberControllerImpl   implements MemberController {
-	private static final Logger logger = LoggerFactory.getLogger(MemberControllerImpl.class);
+	private static final Logger log = Logger.getLogger(MemberControllerImpl.class); 
 	@Autowired
 	private MemberService memberService;
 	@Autowired
@@ -48,6 +50,7 @@ public class MemberControllerImpl   implements MemberController {
 	@RequestMapping(value="/member/listMembers.do" ,method = RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
+		log.info(viewName);
 //		String viewName = (String)request.getAttribute("viewName");
 		//System.out.println("viewName: " +viewName);
 		List membersList = memberService.listMembers();
@@ -81,6 +84,7 @@ public class MemberControllerImpl   implements MemberController {
 //	@RequestMapping(value = "/member/*Form.do", method =  RequestMethod.GET)
 	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
+		log.info("viewName !! " + viewName);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		return mav;
@@ -95,6 +99,7 @@ public class MemberControllerImpl   implements MemberController {
 	memberVO = memberService.login(member);
 	if(memberVO != null) {
 		    HttpSession session = request.getSession();
+		    log.info("session !! " + session);
 		    session.setAttribute("member", memberVO);
 		    session.setAttribute("isLogOn", true);
 		    mav.setViewName("redirect:/member/listMembers.do");
