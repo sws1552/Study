@@ -71,7 +71,7 @@
 		]]>
 	</delete>
 	
-	<select id="selectNeWImageFileNO" resultType="int">
+	<select id="selectNewImageFileNO" resultType="int">
 		<![CDATA[
 			SELECT nvl(max(imageFileNO), 0) from t_imageFile
 		]]>
