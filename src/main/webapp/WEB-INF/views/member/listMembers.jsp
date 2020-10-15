@@ -13,8 +13,19 @@
 <head>
 <meta charset=UTF-8">
 <title>회원 정보 출력창</title>
+	<style>
+		div.sepoaux_mockup_textbox:hover{
+			background:black;
+		}
+	</style>
 </head>
 <body>
+	
+
+	<div class="sepoaux_mockup_textbox">
+	keyword
+	</div>
+
 <table border="1"  align="center"  width="80%">
     <tr align="center"   bgcolor="lightgreen">
       <td ><b>아이디</b></td>
