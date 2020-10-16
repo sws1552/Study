@@ -5,6 +5,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="s.w.s.member.vo.MemberVO"  alias="memberVO" />
-		<typeAlias type="s.w.s.board.vo.ArticleVO"  alias="ArticleVO" />
+		<typeAlias type="s.w.s.board.vo.ImageVO"  alias="imageVO" />
+		<typeAlias type="s.w.s.board.vo.ArticleVO"  alias="articleVO" />
 	</typeAliases>
 </configuration>
